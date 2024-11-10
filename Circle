@@ -1,0 +1,59 @@
+#include <iostream>
+#include <cmath> 
+
+class Circle {
+private:
+    double radius;
+
+public:
+    
+    Circle(double r) : radius(r) {
+        if (radius < 0) {
+            radius = 0; /
+        }
+    }
+
+    
+    bool operator==(const Circle& other) const {
+        return radius == other.radius;
+    }
+
+    
+    bool operator>(const Circle& other) const {
+        return getCircumference() > other.getCircumference();
+    }
+
+    
+    Circle& operator+=(double value) {
+        radius += value;
+        if (radius < 0) {
+            radius = 0; 
+        }
+        return *this;
+    }
+
+    
+    Circle& operator-=(double value) {
+        radius -= value;
+        if (radius < 0) {
+            radius = 0; 
+        }
+        return *this;
+    }
+
+    
+    double getCircumference() const {
+        return 2 * M_PI * radius;
+    }
+
+    
+    double getRadius() const {
+        return radius;
+    }
+
+    
+    friend std::ostream& operator<<(std::ostream& os, const Circle& circle) {
+        os << "Circle(radius=" << circle.radius << ")";
+        return os;
+    }
+};
